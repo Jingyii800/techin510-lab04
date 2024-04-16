@@ -21,7 +21,7 @@ Utilizing Streamlit, the Book Scraper stores book information in a database, whi
         ```bash
         streamlit run app.py
         ```
-    - Github Action allows book_scraper script runs at 5pm every day.
+    - Github Action allows book_scraper script runs at 5pm every day. You can check the workflow in .github/workflow/main.yaml
     - Webpage Preview
 
 2. Weather App

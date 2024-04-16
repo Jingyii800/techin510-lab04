@@ -30,6 +30,7 @@ Utilizing Streamlit, the Book Scraper stores book information in a database, whi
         streamlit run weather_app.py
         ```
     - Webpage Preview
+      ![image](https://github.com/Jingyii800/techin510-lab04/assets/112589476/dd93aa35-d33d-43af-bd3b-9c968766fdd1)
 
 ## Lessons Learned
 - Web Scraping: Automated data extraction from web pages into a structured database.

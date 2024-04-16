@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-import pandas as pd
 
 def get_lat_lon(location):
     base_url = "https://nominatim.openstreetmap.org/search"

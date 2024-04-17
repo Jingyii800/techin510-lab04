@@ -2,7 +2,7 @@ name: Daily Book Scraper
 
 on:
   schedule:
-    # Runs at 05:00 UTC every day
+    # Runs at 17:00 PDT every day
     - cron: '0 0 * * *'
 
 jobs:

@@ -1,0 +1,32 @@
+name: Daily Book Scraper
+
+on:
+  schedule:
+    # Runs at 17:00 PDT every day
+    - cron: '0 0 * * *'
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install requests
+        pip install bs4
+        pip install psycopg2-binary
+        pip install python-dotenv
+        pip install pandas
+
+
+    - name: Run scraper
+      run: python book_scraper.py
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}

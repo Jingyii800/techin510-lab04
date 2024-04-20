@@ -9,6 +9,16 @@ load_dotenv()
 conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 cur = conn.cursor()
 
+def clear_database():
+    try:
+        cur.execute("DELETE FROM books")
+        conn.commit()
+        print("Database cleared.")
+    except Exception as e:
+        print("Error clearing the database:", e)
+        conn.rollback()
+clear_database()
+
 cur.execute(
     """
     CREATE TABLE IF NOT EXISTS books (
@@ -48,7 +58,8 @@ def book_scrapper(url):
         title = book.find('h3').find('a')['title']
         price = book.find('p', class_='price_color').text[2:]
         rating = rating_convert[book.find('p', class_='star-rating')['class'][1]]
-        book_url = "http://books.toscrape.com/" + book.find('h3').find('a')['href']
+        book_url = 'https://books.toscrape.com/catalogue/' + book.find('h3').find('a')['href']
+        print(book_url)
         description = scrape_book_details(book_url)
         cur.execute(
             "INSERT INTO books (title, description, price, rating) VALUES(%s, %s, %s, %s)", 
@@ -58,4 +69,11 @@ def book_scrapper(url):
         index += 1
     conn.commit()
 
-book_scrapper('https://books.toscrape.com/')
+# book scraper
+index = 1
+while index <= 50:
+    url = f"https://books.toscrape.com/catalogue/page-{index}.html"
+    print("Scraping " + url)
+    book_scrapper(url)
+    
+    index += 1
